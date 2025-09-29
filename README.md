@@ -1,2 +1,1 @@
-# woocommerce-ai-agent
-woocommerce-ai-agent/ ├── woocommerce-ai-agent.php ├── includes/ │   ├── class-data-collector.php │   ├── class-decision-engine.php │   ├── class-action-executor.php │   ├── class-logger.php │   ├── class-settings.php │   └── class-cron-manager.php ├── admin/ │   ├── css/ │   │   └── admin.css │   ├── js/ │   │   └── admin.js │   └──  
+由于完整的电商AI智能体插件代码量非常庞大（数千行），我将为您创建一个功能完整的基础框架版本，包含所有核心模块和必要的文件结构。您可以根据这个框架进一步开发和完善。
