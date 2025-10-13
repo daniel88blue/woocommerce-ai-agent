@@ -1,0 +1,71 @@
+<?php
+/**
+ * 微信平台实现
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+class WAI_WeChat_Platform extends WAI_Abstract_Message_Platform {
+    
+    public function __construct($config = array()) {
+        parent::__construct('wechat', $config);
+    }
+    
+    protected function init() {
+        $this->platform_name = '企业微信机器人';
+        $this->is_connected = !empty($this->config['webhook_key']);
+    }
+    
+    public function send_message($content, $type = 'text', $options = array()) {
+        if (!$this->is_connected) {
+            return false;
+        }
+        
+        $api_url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=" . $this->config['webhook_key'];
+        
+        switch ($type) {
+            case 'markdown':
+                $data = array(
+                    'msgtype' => 'markdown',
+                    'markdown' => array('content' => $content)
+                );
+                break;
+            case 'text':
+            default:
+                $data = array(
+                    'msgtype' => 'text',
+                    'text' => array(
+                        'content' => $content,
+                        'mentioned_list' => $options['mentioned_list'] ?? array()
+                    )
+                );
+        }
+        
+        $response = wp_remote_post($api_url, array(
+            'headers' => array('Content-Type' => 'application/json'),
+            'body' => json_encode($data),
+            'timeout' => 10
+        ));
+        
+        $this->log_message('out', $content, $type);
+        
+        return !is_wp_error($response);
+    }
+    
+    public function receive_message($input_data) {
+        // 处理微信webhook传入的消息
+        $this->log_message('in', json_encode($input_data), 'webhook');
+        
+        // 这里可以解析微信的webhook数据
+        // 返回标准化格式
+        return array(
+            'platform' => 'wechat',
+            'type' => 'command',
+            'content' => $input_data['text'] ?? '',
+            'user_id' => $input_data['userId'] ?? '',
+            'raw_data' => $input_data
+        );
+    }
+}

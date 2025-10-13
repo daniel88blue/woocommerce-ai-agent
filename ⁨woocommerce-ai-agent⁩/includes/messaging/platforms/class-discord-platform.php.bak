@@ -1,0 +1,54 @@
+<?php
+/**
+ * Discord平台实现
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+class WAI_Discord_Platform extends WAI_Abstract_Message_Platform {
+    
+    public function __construct($config = array()) {
+        parent::__construct('discord', $config);
+    }
+    
+    protected function init() {
+        $this->platform_name = 'Discord Webhook';
+        $this->is_connected = !empty($this->config['webhook_url']);
+    }
+    
+    public function send_message($content, $type = 'text', $options = array()) {
+        if (!$this->is_connected) {
+            return false;
+        }
+        
+        $data = array('content' => $content);
+        
+        if ($type === 'embed') {
+            $data['embeds'] = $options['embeds'] ?? array();
+        }
+        
+        $response = wp_remote_post($this->config['webhook_url'], array(
+            'headers' => array('Content-Type' => 'application/json'),
+            'body' => json_encode($data),
+            'timeout' => 10
+        ));
+        
+        $this->log_message('out', $content, $type);
+        
+        return !is_wp_error($response);
+    }
+    
+    public function receive_message($input_data) {
+        $this->log_message('in', json_encode($input_data), 'webhook');
+        
+        return array(
+            'platform' => 'discord',
+            'type' => 'command',
+            'content' => $input_data['content'] ?? '',
+            'user_id' => $input_data['author']['id'] ?? '',
+            'raw_data' => $input_data
+        );
+    }
+}

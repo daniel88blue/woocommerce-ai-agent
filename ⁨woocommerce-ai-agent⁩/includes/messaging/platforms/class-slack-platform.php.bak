@@ -1,0 +1,54 @@
+<?php
+/**
+ * Slack平台实现
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+class WAI_Slack_Platform extends WAI_Abstract_Message_Platform {
+    
+    public function __construct($config = array()) {
+        parent::__construct('slack', $config);
+    }
+    
+    protected function init() {
+        $this->platform_name = 'Slack Webhook';
+        $this->is_connected = !empty($this->config['webhook_url']);
+    }
+    
+    public function send_message($content, $type = 'text', $options = array()) {
+        if (!$this->is_connected) {
+            return false;
+        }
+        
+        $data = array('text' => $content);
+        
+        if ($type === 'blocks') {
+            $data['blocks'] = $options['blocks'] ?? array();
+        }
+        
+        $response = wp_remote_post($this->config['webhook_url'], array(
+            'headers' => array('Content-Type' => 'application/json'),
+            'body' => json_encode($data),
+            'timeout' => 10
+        ));
+        
+        $this->log_message('out', $content, $type);
+        
+        return !is_wp_error($response);
+    }
+    
+    public function receive_message($input_data) {
+        $this->log_message('in', json_encode($input_data), 'webhook');
+        
+        return array(
+            'platform' => 'slack',
+            'type' => 'command',
+            'content' => $input_data['text'] ?? '',
+            'user_id' => $input_data['user_id'] ?? '',
+            'raw_data' => $input_data
+        );
+    }
+}
