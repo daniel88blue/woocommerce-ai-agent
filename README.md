@@ -1,0 +1,94 @@
+.github/   📁 .github/
+    📁 workflows/   📁 工作流程/
+        📄 deploy.yml
+📄 README.md
+📁 admin/
+    📄 class-admin.php
+    📁 css /
+        📄 admin.css
+        📄 unified-dashboard.css
+        📄 wizard.css
+    📁 js /
+        📄 admin.js
+        📄 wizard.js
+    📁 partials/
+        📄 ai-advanced-dashboard.php
+        📄 automation-orchestrator.php
+        📄 cross-platform-management.php
+        📄 dao-governance.php   📄 dao-governance.php
+        📄 dashboard.php
+        📄 messaging-platforms.php
+        📄 metaverse-stores.php
+        📄 swarm-management.php
+        📄 unified-dashboard.php
+        📄 web3-dashboard.php
+📁 includes/
+    📁 admin/
+        📄 ai-advanced-dashboard.php
+        📄 class-cross-platform-manager.php
+        📄 class-system-architect.php
+        📁 views/
+            📄 cross-platform-dashboard.php
+            📄 system-architecture.php
+    📁 ajax/
+        📄 class-messaging-ajax.php
+        📄 class-performance-ajax.php
+    📄 class-action-executor.php
+    📄 class-ai-advanced-engine.php
+    📄 class-automation-orchestrator.php
+    📄 class-conversific-integration.php
+    📄 class-cron-handler.php
+    📄 class-cron-manager.php
+    📄 class-cross-platform-agent.php
+    📄 class-dao-governance.php
+    📄 class-data-aggregator.php
+    📄 class-data-collector.php
+    📄 class-decision-engine.php
+    📄 class-install-wizard.php
+    📄 class-klaviyo-integration.php
+    📄 class-logger.php
+    📄 class-metaverse-gateway.php
+    📄 class-mobile-optimizer.php
+    📄 class-module-registry.php
+📄 类模块注册表.php
+    📄 class-plugin-manager.php
+    📄 class-settings.php
+    📄 class-swarm-intelligence.php
+    📄 class-web3-integration.php
+    📁 controllers/
+        📄 class-store-swarm-controller.php
+        📄 class-swarm-intelligence.php
+    📁 engines/
+        📄 class-ai-strategy-engine.php
+    📁 gateways/
+        📄 class-wc-gateway-web3-crypto.php
+    📁 messaging/
+        📄 class-ai-cto-platform.php
+        📄 class-command-processor.php
+        📄 class-deepseek-api.php
+        📄 class-message-manager.php
+        📄 class-message-platform.php
+        📄 class-messaging-loader.php
+        📁 platforms/
+            📄 class-discord-platform.php.bak
+            📄 class-slack-platform.php.bak
+            📄 class-wechat-platform.php.bak
+    📁 models/
+        📄 class-store-profile.php
+    📁 optimizers/
+        📄 class-auto-code-optimizer.php
+        📄 class-performance-optimizer.php
+    📁 threecore/
+        📄 class-content-strategy-engine.php
+        📄 class-evolutionary-feedback-loop.php
+        📄 class-multiplatform-seo-optimizer.php
+        📄 class-overlap-space-analyzer.php
+        📄 class-strategy-engine.php
+        📄 class-threecore-orchestrator.php
+        📄 class-user-profile-generator.php
+    📁 trackers/
+        📄 class-value-metrics-tracker.php
+📄 类值指标跟踪器.php
+📄 uninstall.php
+📄 woocommerce-ai-agent.php
+📄 文件目录
